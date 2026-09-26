@@ -1,0 +1,56 @@
+Thứ tự triển khai theo dependency (không được đảo)
+
+Bước 1 — Nền móng (bắt buộc làm trước, mọi thứ khác phụ thuộc vào đây)
+
+src/config/env.config.ts — base URL (https://billpay-api.gauravkhurana-practice-api.workers.dev), 5 bộ credential demo, timeout, retry count. Đọc từ .env để sau này đổi môi trường không sửa code.
+src/types/api.types.ts — định nghĩa interface cho User, Bill, Payment, Biller, PaymentMethod, ErrorResponse, Pagination khớp với JSON Schema trong Swagger của API. Làm bước này trước vì mọi client, factory, schemaValidator đều import từ đây.
+src/api/BaseApiClient.ts — chỉ 1 class xử lý: gắn header auth mặc định, tự sinh X-Request-Id, hàm query() hỗ trợ 3 hình thức HTTP QUERY. Chưa cần các method nghiệp vụ, chỉ cần get/post/put/patch/delete/query generic.
+
+Bước 2 — Verify nền móng bằng 1 client + 1 test duy nhất
+
+Viết src/api/AuthClient.ts (đơn giản nhất — gọi /v1/auth/me).
+Viết tests/auth/api/data-driven-auth.spec.ts với chỉ 1 case (API Key hợp lệ → 200).
+Chạy npm run test:api thật, thấy pass. Đây là cột mốc quan trọng nhất: nó xác nhận toàn bộ chuỗi config → BaseApiClient → auth header → network đều đúng. Đừng viết thêm gì trước khi bước này pass.
+
+Bước 3 — Nhân rộng client theo entity, đúng thứ tự phụ thuộc nghiệp vụ
+Theo business flow đã biết (User → PaymentMethod → Biller → Bill → Payment), làm client theo đúng thứ tự này:
+
+UserClient.ts → test bằng tests/users/api/get-user.spec.ts (dùng demo ID user-demo-001 có sẵn, không cần factory ngay)
+BillerClient.ts → tests/billers/api/get-billers.spec.ts
+BillClient.ts → tests/bills/api/get-bill.spec.ts
+PaymentClient.ts → tests/payments/api/get-payment.spec.ts
+JobClient.ts → để sau cùng, vì Job không nằm trong luồng chính
+
+Mỗi client xong → viết ngay 1 test GET đơn giản bằng demo ID có sẵn để xác nhận client chạy đúng, chưa vội viết POST/PATCH/DELETE.
+
+Bước 4 — Factory (chỉ làm sau khi có type + đã thấy shape dữ liệu thật từ bước 3)
+
+userFactory.ts, billFactory.ts — lúc này mới biết chính xác field nào bắt buộc, field nào optional (nhìn từ response thật ở bước 3, đỡ đoán mò).
+Thêm paymentFactory.ts, billerFactory.ts nếu cần test tạo mới các entity này.
+
+Bước 5 — hybrid.fixture.ts
+Gộp tất cả client (đã xong ở bước 3) + page object (nếu UI đã có) vào 1 fixture context. Làm bước này sau cùng trong nhóm src/ vì nó phụ thuộc toàn bộ client đã hoàn thiện.
+
+Sau khi src/ ổn định — lấp spec rỗng theo độ ưu tiên
+
+Nhìn cây thư mục tests/ bạn đã tạo, thứ tự lấp nội dung nên là:
+
+CRUD cơ bản (billers/api, bills/api, payments/api, users/api) — mỗi file hiện đang rỗng (get-x, create-x, update-x, delete-x, patch-x) → lấp đúng 1 case happy-path/file trước, chưa thêm negative case
+e2e/api/payment-workflow.spec.ts — ráp luồng 9 bước thành 1 test end-to-end, dùng client đã có
+Negative case — quay lại từng file CRUD ở bước 1, thêm case lỗi (400/401/403/404/409) dựa theo bảng negative scenario của API
+protocol/api/ (http-query, conditional-etag, idempotency) — làm sau CRUD vì cần entity đã tồn tại để test ETag/QUERY trên
+jobs/api/ — polling cần pollingHelper.ts viết trước
+e2e/hybrid/ — chỉ làm khi cả API layer lẫn UI layer (pages/) đều đã có ít nhất 1 page object chạy được
+*/ui/ — làm cuối cùng, vì UI phụ thuộc Practice UI đã load được + POM ổn định
+Song song, không chặn tiến độ chính
+playwright.yml (CI): bật sớm nhưng ban đầu chỉ chạy @smoke, mở rộng scope khi test tăng dần — không nên đợi có hết test mới cấu hình CI.
+schemaValidator.ts: chỉ cần viết khi đã có ít nhất 2-3 response thật để biết schema chính xác.
+testrailReporter.ts, jiraIntegration.ts: để cuối cùng. Đây là lớp tích hợp báo cáo, không ảnh hưởng khả năng chạy test — làm sớm chỉ tốn công vì mã @Cxxx còn chưa ổn định lúc test case đang thay đổi liên tục.
+manual-testing/*.md + CSV: cập nhật song song mỗi khi 1 nhóm test (VD: billers CRUD) đã ổn định, không cần viết hết 1 lần — vì mã Cxxx cần khớp đúng test đã tồn tại thật trong code, viết trước rồi code đổi sẽ phải sửa lại 2 lần.
+Checklist "xong 1 giai đoạn" trước khi qua giai đoạn tiếp
+ npm run test:api -- --grep @smoke chạy xanh hết
+ Không còn file .spec.ts nào rỗng trong nhóm đang làm
+ Mỗi test mới thêm có gắn tag @Cxxx @PAY-xxx ngay từ đầu (đừng để cuối mới gắn, dễ quên/lệch)
+ RTM.md cập nhật ngay khi thêm case mới, không dồn cuối kỳ
+
+Tóm lại: đừng lan ra 60+ file rỗng cùng lúc — đi theo 1 đường ống dọc (config → 1 client → 1 test pass), xác nhận chạy thật trên API thật rồi mới nhân bản pattern đó ra các resource còn lại theo đúng thứ tự phụ thuộc nghiệp vụ (User → PaymentMethod → Biller → Bill → Payment → Job).
