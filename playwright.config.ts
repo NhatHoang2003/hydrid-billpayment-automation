@@ -10,7 +10,16 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : Number(process.env.API_RETRIES ?? 0),
   workers: process.env.CI ? 1 : undefined,
-  reporter: 'html',
+  reporter: [
+    ['list'],
+    [
+      'html',
+      {
+        outputFolder: 'playwright-report',
+        open: 'never',
+      },
+    ],
+  ],
   use: {
     baseURL: process.env.API_BASE_URL ?? 'https://billpay-api.gauravkhurana-practice-api.workers.dev',
     trace: 'on-first-retry',
