@@ -7,12 +7,12 @@ export class AuthClient extends BaseApiClient {
     }
 
     async getToken(
-        data?: TokenRequest,
+        payload?: TokenRequest,
         options: RequestOptions = {}
     ) {
         return this.post<TokenResponse>(
             '/oauth/token',
-            data,
+            payload,
             options
         );
     }

@@ -4,7 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright test"
+    "test": "npx playwright test",
+    "test:repeat": "npx playwright test --repeat-each=2",
+    "test:api": "playwright test tests/users/api",
+    "test:user:create": "playwright test tests/users/api/create-user.spec.ts",
+    "test:user:delete": "playwright test tests/users/api/delete-user.spec.ts",
+    "test:user:list": "playwright test tests/users/api/get-users.spec.ts",
+    "test:user:getById": "playwright test tests/users/api/get-userById.spec.ts",
+    "test:user:patch": "playwright test tests/users/api/patch-user.spec.ts",
+    "test:user:update": "playwright test tests/users/api/update-user.spec.ts"
   },
   "keywords": [],
   "author": "",
@@ -12,7 +20,8 @@
   "type": "commonjs",
   "devDependencies": {
     "@playwright/test": "^1.63.0",
-    "@types/node": "^22.20.3"
+    "@types/node": "^22.20.3",
+    "typescript": "^7.0.2"
   },
   "dependencies": {
     "axios": "^1.20.0",

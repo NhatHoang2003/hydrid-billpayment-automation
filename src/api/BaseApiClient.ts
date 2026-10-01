@@ -56,7 +56,7 @@ export class BaseApiClient {
 
     async post<T>(
         url: string,
-        data?: object,
+        data?: object | string,
         options: RequestOptions = {}
     ): Promise<AxiosResponse<T>> {
         return this.request<T>('POST', url, {

@@ -1,0 +1,54 @@
+| ID | Test case | Nhóm | Cách viết |
+|---|---|---|---|
+| C001 | Get users with default parameters | Positive | Data-driven |
+| C002 | Get users with `page` only | Positive | Data-driven |
+| C003 | Get users with `limit` only | Positive | Data-driven |
+| C004 | Get users with `page` + `limit` | Positive | Data-driven |
+| C005 | Combine all valid params | Positive | Data-driven |
+| C006 | Accept min boundary `page = 1` | Page | Standalone |
+| C007 | Accept middle valid page | Page | Standalone |
+| C008 | Accept current max page | Page | Standalone / dynamic |
+| C009 | Page just exceeding `totalPages` returns empty data | Page | Standalone / dynamic |
+| C010 | Far out-of-bounds page returns empty data | Page | Standalone / dynamic |
+| C011 | Reject `page = 0` | Page validation | Data-driven |
+| C012 | Reject `page = -1` | Page validation | Data-driven |
+| C013 | Reject decimal `page = 1.5` | Page validation | Data-driven |
+| C014 | Reject string `page = "abc"` | Page validation | Data-driven |
+| C015 | Reject empty `page = ""` | Page validation | Data-driven |
+| C016 | Reject page exceeding max safe integer | Page validation | Data-driven |
+| C017 | Reject boolean `page = true` | Page validation | Data-driven |
+| C018 | Reject array `page = [1,2]` | Page validation | Data-driven |
+| C019 | Accept min `limit = 1` | Limit | Data-driven |
+| C020 | Accept normal `limit = 50` | Limit | Data-driven |
+| C021 | Accept max `limit = 100` | Limit | Data-driven |
+| C022 | Reject `limit = 101` | Limit | Data-driven |
+| C023 | Reject `limit = 0` | Limit | Data-driven |
+| C024 | Reject `limit = -10` | Limit | Data-driven |
+| C025 | Reject decimal `limit = 10.5` | Limit | Data-driven |
+| C026 | Reject string `limit = "ten"` | Limit | Data-driven |
+| C027 | Reject empty `limit = ""` | Limit | Data-driven |
+| C028 | Reject limit exceeding integer bounds | Limit | Data-driven |
+| C029 | Reject array `limit = [10,20]` | Limit | Data-driven |
+| C030 | Reject boolean `limit = false` | Limit | Data-driven |
+| C031 | Reject invalid `kyc_status = "approved"` | KYC | Data-driven |
+| C032 | Reject uppercase `kyc_status = "VERIFIED"` | KYC | Data-driven |
+| C033 | Reject numeric `kyc_status = 1` | KYC | Data-driven |
+| C034 | Reject empty `kyc_status = ""` | KYC | Data-driven |
+| C035 | Reject array `kyc_status` | KYC | Data-driven |
+| C036 | Search by full name | Search | Data-driven |
+| C037 | Search by partial name | Search | Data-driven |
+| C038 | Search by name keyword | Search | Data-driven |
+| C039 | Non-existing name returns empty result | Search | Data-driven |
+| C040 | Search by full email | Search | Data-driven |
+| C041 | Search by partial email | Search | Data-driven |
+| C042 | Search by email domain | Search | Data-driven |
+| C043 | Search by full phone number | Search | Data-driven |
+| C044 | Search phone without `+` | Search | Data-driven |
+| C045 | Search by partial phone number | Search | Data-driven |
+| C046 | Empty search | Search | Data-driven |
+| C047 | Case-insensitive search | Search | Data-driven |
+| C048 | Middle page `hasNext/hasPrev` behavior | Pagination | Standalone |
+| C049 | Returned item count ≤ requested limit | Pagination | Standalone |
+| C050 | `totalPages = ceil(total / limit)` | Pagination | Standalone |
+| C051 | Verify root response structure | Schema | Standalone |
+| C052 | Ignore unknown query parameter | Params | Standalone |
