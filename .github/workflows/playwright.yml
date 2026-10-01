@@ -16,9 +16,9 @@ permissions:
   contents: read
 
 jobs:
-  # =========================
-  # CI: Run Playwright tests
-  # =========================
+  # ==========================================
+  # CI: Validate and run Playwright tests
+  # ==========================================
   test:
     name: Run Playwright Tests
     runs-on: ubuntu-latest
@@ -57,9 +57,9 @@ jobs:
           retention-days: 30
           if-no-files-found: warn
 
-  # =========================
-  # CD: Deploy HTML report
-  # =========================
+  # ==========================================
+  # CD: Deploy report to GitHub Pages
+  # ==========================================
   deploy:
     name: Deploy Playwright Report
     runs-on: ubuntu-latest
@@ -77,6 +77,10 @@ jobs:
       contents: read
       pages: write
       id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     concurrency:
       group: github-pages
@@ -100,7 +104,7 @@ jobs:
             echo "Playwright report found."
           else
             echo "available=false" >> "$GITHUB_OUTPUT"
-            echo "No Playwright report to deploy."
+            echo "No Playwright report available."
           fi
 
       - name: Setup GitHub Pages
@@ -117,3 +121,15 @@ jobs:
         if: steps.report.outputs.available == 'true'
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Show Playwright Report URL
+        if: steps.deployment.outcome == 'success'
+        shell: bash
+        env:
+          REPORT_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          echo "## Playwright HTML Report" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "[View Playwright Report]($REPORT_URL)" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "Report URL: $REPORT_URL" >> "$GITHUB_STEP_SUMMARY"
