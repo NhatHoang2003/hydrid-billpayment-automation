@@ -23,7 +23,7 @@ test.describe('POST /oauth/token - OAuth2 Token Endpoint', () => {
         expect(body.success).toBe(false);
         expect(body.error.code).toBe('INVALID_CONTENT_TYPE');
         expect(body.error.message).toBe('Content-Type must be application/x-www-form-urlencoded or application/json');
-        expect(body.error.traceId).toBeTruthy()
+        expect(body.error.traceId).toBeTruthy();
         expect(body.error.timestamp).toBeTruthy();
     });
 

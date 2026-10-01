@@ -1,6 +1,11 @@
 import { Address, ApiSuccessResponse, ApiListResponse } from './common.types';
 
-export type KycStatus = 'unverified' | 'pending' | 'verified' | 'rejected';
+export interface GetUsersParams {
+    page?: number;
+    limit?: number;
+    kyc_status?: string;
+    search?: string;
+}
 
 export interface User {
     id: string;
@@ -8,19 +13,20 @@ export interface User {
     phone?: string;
     firstName: string;
     lastName: string;
-    kycStatus: KycStatus;
+    kycStatus: string;
     address?: Address;
     createdAt: string;
     updatedAt?: string;
 }
 
 export interface CreateUserRequest {
-    email: string;
-    phone?: string;
-    firstName: string;
-    lastName: string;
-    address?: Address;
+    email?: string | null;
+    phone?: string | null;
+    firstName?: string | null;
+    lastName?: string | null;
+    address?: Address | null;
 }
+
 
 export type UpdateUserRequest = CreateUserRequest;
 export type PatchUserRequest = Partial<CreateUserRequest>;
@@ -30,7 +36,7 @@ export type UsersListResponse = ApiListResponse<User>;
 export type AuthMeResponse = ApiSuccessResponse<User>;
 
 export interface KycVerificationRequest {
-    kycStatus: KycStatus;
+    kycStatus: string;
 }
 
 export type KycVerificationResponse = ApiSuccessResponse<User>;

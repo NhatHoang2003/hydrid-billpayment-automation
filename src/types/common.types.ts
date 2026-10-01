@@ -31,16 +31,27 @@ export interface ResponseMeta {
     pagination?: Pagination;
 }
 
+export interface ListResponseMeta extends ResponseMeta {
+    pagination: Pagination;
+}
+
 export interface ApiSuccessResponse<data> {
     success: true;
     data: data;
     meta: ResponseMeta;
 }
 
-export type ApiListResponse<data> = ApiSuccessResponse<data[]>;
+export interface ApiListResponse<data> {
+    success: true;
+    data: data[];
+    meta: ListResponseMeta;
+}
 
 export interface DeleteResponse {
     success: true;
-    data: { id: string; deleted: true };
+    data: {
+        id: string;
+        deleted: true;
+    };
     meta: ResponseMeta;
 }
