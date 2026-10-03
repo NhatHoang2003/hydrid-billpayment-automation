@@ -1,10 +1,12 @@
-import { expect, test } from "../../../src/fixtures/apiFixture";
-import { TokenResponseSchema } from "../../../src/schemas/auth.schemas";
-import { ApiErrorResponseSchema, ApiSuccessResponseSchema } from "../../../src/schemas/common.schemas";
+import { test, expect } from '../../../src/fixtures/apiFixture';
+import { SchemaValidator } from '../../../src/helpers/schemaValidator';
+import { TokenResponseSchema } from '../../../src/schemas/auth.schemas';
+import { ApiErrorResponseSchema } from '../../../src/schemas/common.schemas';
+import { invalidPasswordCases } from '../../../src/data/api/auth/auth-token-cases';
 
+test.describe('POST /oauth/token - Password Grant', () => {
 
-test.describe('POST /oauth/token - OAuth2 Token Endpoint', () => {
-    test('@smoke @C002 @AUTH-002 valid password grant returns access token', async ({ authClient }) => {
+    test('@AUTH-002 @C002 @smoke @regression should return an access token with valid username and password', async ({ authClient }) => {
         const response = await authClient.getToken({
             grant_type: 'password',
             username: 'demo',
@@ -13,73 +15,65 @@ test.describe('POST /oauth/token - OAuth2 Token Endpoint', () => {
 
         expect(response.status).toBe(200);
 
-        const body = TokenResponseSchema.parse(response.data);
+        const body = await SchemaValidator.validate(
+            TokenResponseSchema,
+            response.data,
+            'Token Response'
+        );
 
         expect(body.access_token).toBeTruthy();
         expect(body.token_type).toBe('Bearer');
         expect(body.expires_in).toBe(3600);
-    });
+        expect(typeof body.scope).toBe('string');
+    }
+    );
 
-    test('@security @C005 @AUTH-005 invalid username for password grant returns 401', async ({ authClient }) => {
-        const response = await authClient.getToken({
+    test('@AUTH-023 @C023 @regression should return an access token with valid form-encoded credentials', async ({ authClient }) => {
+        const payload = new URLSearchParams({
             grant_type: 'password',
-            username: 'wrong-user',
+            username: 'demo',
             password: 'password123',
         });
 
-        expect(response.status).toBe(401);
+        const response = await authClient.getToken(
+            payload.toString(),
+            {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+            }
+        );
 
-        const body = ApiErrorResponseSchema.parse(response.data);
+        expect(response.status).toBe(200);
 
-        expect(body.success).toBe(false);
-        expect(body.error.code).toBe('INVALID_GRANT');
-        expect(body.error.message).toBe('Invalid username or password');
-    });
+        const body = await SchemaValidator.validate(
+            TokenResponseSchema,
+            response.data,
+            'Token Response'
+        );
 
-    test('@security @C006 @AUTH-006 invalid password for password grant returns 401', async ({ authClient }) => {
-        const response = await authClient.getToken({
-            grant_type: 'password',
-            username: 'demo',
-            password: 'wrong-password',
+        expect(body.access_token).toBeTruthy();
+        expect(body.token_type).toBe('Bearer');
+        expect(body.expires_in).toBe(3600);
+        expect(typeof body.scope).toBe('string');
+    }
+    );
+
+    for (const testCase of invalidPasswordCases) {
+        test(`@${testCase.id} @C${testCase.id} @regression ${testCase.tag} ${testCase.name}`, async ({ authClient }) => {
+            const response = await authClient.getToken(testCase.payload);
+
+            expect(response.status).toBe(401);
+
+            const body = await SchemaValidator.validate(
+                ApiErrorResponseSchema,
+                response.data,
+                'API Error Response'
+            );
+
+            expect(body.success).toBe(false);
+            expect(body.error.code).toBe('INVALID_GRANT');
+            expect(body.error.message).toBe('Invalid username or password');
         });
-
-        expect(response.status).toBe(401);
-
-        const body = ApiErrorResponseSchema.parse(response.data);
-
-        expect(body.success).toBe(false);
-        expect(body.error.code).toBe('INVALID_GRANT');
-        expect(body.error.message).toBe('Invalid username or password');
-
-    });
-
-    test('@validation @C011 @AUTH-011 missing username for password grant returns 401', async ({ authClient }) => {
-        const response = await authClient.getToken({
-            grant_type: 'password',
-            password: 'password123',
-        });
-
-        expect(response.status).toBe(401);
-
-        const body = ApiErrorResponseSchema.parse(response.data);
-
-        expect(body.success).toBe(false);
-        expect(body.error.code).toBe('INVALID_GRANT');
-        expect(body.error.message).toBe('Invalid username or password');
-    });
-
-    test('@validation @C012 @AUTH-012 missing password for password grant returns 400', async ({ authClient }) => {
-        const response = await authClient.getToken({
-            grant_type: 'password',
-            username: 'demo',
-        });
-
-        expect(response.status).toBe(401);
-
-        const body = ApiErrorResponseSchema.parse(response.data);
-
-        expect(body.success).toBe(false);
-        expect(body.error.code).toBe('INVALID_GRANT');
-        expect(body.error.message).toBe('Invalid username or password');
-    });
+    }
 });

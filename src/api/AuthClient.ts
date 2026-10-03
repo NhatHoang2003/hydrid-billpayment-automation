@@ -7,7 +7,7 @@ export class AuthClient extends BaseApiClient {
     }
 
     async getToken(
-        payload?: TokenRequest,
+        payload?: TokenRequest | Record<string, unknown> | string,
         options: RequestOptions = {}
     ) {
         return this.post<TokenResponse>(

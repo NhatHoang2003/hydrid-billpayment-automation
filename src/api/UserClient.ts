@@ -28,6 +28,16 @@ export class UserClient extends BaseApiClient {
         );
     }
 
+    async getUserById(
+        userId: string,
+        options: RequestOptions = {}
+    ) {
+        return this.get<UserResponse>(
+            `/v1/users/${userId}`,
+            options
+        );
+    }
+
     async deleteUser(
         userId: string,
         options: RequestOptions = {}

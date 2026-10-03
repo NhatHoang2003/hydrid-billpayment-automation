@@ -3,7 +3,7 @@ import { AuthClient } from '../../../src/api/AuthClient';
 import { ApiSuccessResponseSchema } from '../../../src/schemas/common.schemas';
 
 test.describe('Authentication API', () => {
-    test('@smoke @C019 @AUTH-019 valid API Key returns current user', async () => {
+    test('@smoke @C024 @AUTH-024 valid API Key returns current user', async () => {
         const authClient = new AuthClient();
 
         const response = await authClient.getCurrentUser();

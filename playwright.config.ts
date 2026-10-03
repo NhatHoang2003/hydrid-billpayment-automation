@@ -12,18 +12,14 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: [
     ['list'],
-    [
-      'html',
-      {
-        outputFolder: 'playwright-report',
-        open: 'never',
-      },
-    ],
+    ['html', {
+      outputFolder: 'playwright-report',
+      open: process.env.CI ? 'never' : 'on-failure'
+    }],
+    ['allure-playwright', {
+      resultsDir: 'allure-results'
+    }]
   ],
-  use: {
-    baseURL: process.env.API_BASE_URL ?? 'https://billpay-api.gauravkhurana-practice-api.workers.dev',
-    trace: 'on-first-retry',
-  },
 
   projects: [
     {
