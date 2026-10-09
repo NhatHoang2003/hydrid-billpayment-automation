@@ -5,7 +5,7 @@ import path from 'path';
 dotenv.config({ path: path.resolve(__dirname, process.env.ENV_FILE || '.env') });
 
 export default defineConfig({
-  testDir: './tests',
+  testDir: './automation-testing/tests',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : Number(process.env.API_RETRIES ?? 0),
