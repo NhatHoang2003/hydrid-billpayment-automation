@@ -1,0 +1,1101 @@
+{
+  "info": {
+    "_postman_id": "92fbd1e6-d015-4fa6-a952-e23736e96690",
+    "name": "Bill Payment API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "49200704",
+    "_collection_link": "https://go.postman.co/collection/49200704-92fbd1e6-d015-4fa6-a952-e23736e96690?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "OAuth2",
+          "item": [
+            {
+              "name": "validation",
+              "item": [
+                {
+                  "name": "Missing Grant Type",
+                  "event": [
+                    {
+                      "listen": "prerequest",
+                      "script": {
+                        "exec": [
+                          "pm.variables.set(\"testCaseId\", \"AUTH-007\");\r",
+                          "pm.variables.set(\"expectedStatus\", 400);"
+                        ],
+                        "type": "text/javascript",
+                        "packages": {},
+                        "requests": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "key": "grant_type",
+                          "value": "password",
+                          "type": "text",
+                          "uuid": "7480b778-9795-4cd8-9817-4a7c69553657",
+                          "disabled": true
+                        },
+                        {
+                          "key": "client_id",
+                          "value": "{{OAUTH_CLIENT_ID}}",
+                          "type": "text",
+                          "uuid": "98bf1458-3323-4037-85df-27c57bcef727",
+                          "disabled": true
+                        },
+                        {
+                          "key": "client_secret",
+                          "value": "{{OAUTH_CLIENT_SECRET}}",
+                          "type": "text",
+                          "uuid": "0059ae31-9dc2-4b36-a5dd-026ef4e26977",
+                          "disabled": true
+                        },
+                        {
+                          "key": "username",
+                          "value": "{{BASIC_AUTH_USERNAME}}",
+                          "type": "text",
+                          "uuid": "ebdd2349-8044-48a6-80f9-5007dbc6db2c",
+                          "disabled": true
+                        },
+                        {
+                          "key": "password",
+                          "value": "{{BASIC_AUTH_PASSWORD}}",
+                          "type": "text",
+                          "uuid": "1f1aa686-9575-4c3d-9059-005dea7107a8",
+                          "disabled": true
+                        },
+                        {
+                          "key": "refresh_token",
+                          "value": "",
+                          "type": "text",
+                          "uuid": "9244098d-23a1-4cbc-9246-84b071a2b34e",
+                          "disabled": true
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{API_BASE_URL}}/oauth/token",
+                      "host": [
+                        "{{API_BASE_URL}}"
+                      ],
+                      "path": [
+                        "oauth",
+                        "token"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Unsupported Grant Type",
+                  "event": [
+                    {
+                      "listen": "prerequest",
+                      "script": {
+                        "exec": [
+                          "pm.variables.set(\"testCaseId\", \"AUTH-008\");\r",
+                          "pm.variables.set(\"expectedStatus\", 400);"
+                        ],
+                        "type": "text/javascript",
+                        "packages": {},
+                        "requests": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"grant_type\": \"unsupported_grant\"\r\n}   ",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{API_BASE_URL}}/oauth/token",
+                      "host": [
+                        "{{API_BASE_URL}}"
+                      ],
+                      "path": [
+                        "oauth",
+                        "token"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Unsupported Content-Type",
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"grant_type\": \"client_credentials\",\r\n  \"client_id\": \"demo-client\",\r\n  \"client_secret\": \"demo-secret-789\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{API_BASE_URL}}/oauth/token",
+                      "host": [
+                        "{{API_BASE_URL}}"
+                      ],
+                      "path": [
+                        "oauth",
+                        "token"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Omitted Request Body",
+                  "event": [
+                    {
+                      "listen": "prerequest",
+                      "script": {
+                        "exec": [
+                          "pm.variables.set(\"testCaseId\", \"AUTH-016\");\r",
+                          "pm.variables.set(\"expectedStatus\", 400);"
+                        ],
+                        "type": "text/javascript",
+                        "packages": {},
+                        "requests": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "url": {
+                      "raw": "{{API_BASE_URL}}/oauth/token",
+                      "host": [
+                        "{{API_BASE_URL}}"
+                      ],
+                      "path": [
+                        "oauth",
+                        "token"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Empty JSON Body",
+                  "event": [
+                    {
+                      "listen": "prerequest",
+                      "script": {
+                        "exec": [
+                          "pm.variables.set(\"testCaseId\", \"AUTH-017\");\r",
+                          "pm.variables.set(\"expectedStatus\", 400);"
+                        ],
+                        "type": "text/javascript",
+                        "packages": {},
+                        "requests": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{API_BASE_URL}}/oauth/token",
+                      "host": [
+                        "{{API_BASE_URL}}"
+                      ],
+                      "path": [
+                        "oauth",
+                        "token"
+                      ]
+                    }
+                  },
+                  "response": []
+                }
+              ],
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {},
+                    "exec": [
+                      ""
+                    ]
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {},
+                    "exec": [
+                      "const testCaseId = pm.variables.get(\"testCaseId\");\r",
+                      "const expectedStatus = Number(\r",
+                      "    pm.variables.get(\"expectedStatus\")\r",
+                      ");\r",
+                      "\r",
+                      "pm.test(`${testCaseId} - Status code is ${expectedStatus}`, () => {\r",
+                      "    pm.response.to.have.status(expectedStatus);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(`${testCaseId} - Response is JSON`, () => {\r",
+                      "    pm.expect(\r",
+                      "        pm.response.headers.get(\"Content-Type\")\r",
+                      "    ).to.include(\"application/json\");\r",
+                      "});\r",
+                      "\r",
+                      "let body;\r",
+                      "\r",
+                      "try {\r",
+                      "    body = pm.response.json();\r",
+                      "} catch (error) {\r",
+                      "    pm.test(`${testCaseId} - Response body is valid JSON`, () => {\r",
+                      "        pm.expect.fail(\"Response body is not valid JSON\");\r",
+                      "    });\r",
+                      "    return;\r",
+                      "}\r",
+                      "\r",
+                      "const errorSchema = {\r",
+                      "    type: \"object\",\r",
+                      "    required: [\r",
+                      "        \"success\",\r",
+                      "        \"error\"\r",
+                      "    ],\r",
+                      "    properties: {\r",
+                      "        success: {\r",
+                      "            type: \"boolean\"\r",
+                      "        },\r",
+                      "        error: {\r",
+                      "            type: \"object\",\r",
+                      "            required: [\r",
+                      "                \"code\",\r",
+                      "                \"message\"\r",
+                      "            ],\r",
+                      "            properties: {\r",
+                      "                code: {\r",
+                      "                    type: \"string\"\r",
+                      "                },\r",
+                      "                message: {\r",
+                      "                    type: \"string\"\r",
+                      "                }\r",
+                      "            }\r",
+                      "        }\r",
+                      "    }\r",
+                      "};\r",
+                      "\r",
+                      "pm.test(`${testCaseId} - Error schema is valid`, () => {\r",
+                      "    pm.response.to.have.jsonSchema(errorSchema);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(`${testCaseId} - Success is false`, () => {\r",
+                      "    pm.expect(body.success).to.eql(false);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(`${testCaseId} - Error code is returned`, () => {\r",
+                      "    pm.expect(body.error.code)\r",
+                      "        .to.be.a(\"string\")\r",
+                      "        .and.not.empty;\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(`${testCaseId} - Error message is returned`, () => {\r",
+                      "    pm.expect(body.error.message)\r",
+                      "        .to.be.a(\"string\")\r",
+                      "        .and.not.empty;\r",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "password",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "const testCaseId = pm.iterationData.get(\"testCaseId\");\r",
+                      "const grantType = pm.iterationData.get(\"grant_type\");\r",
+                      "const username = pm.iterationData.get(\"username\");\r",
+                      "const password = pm.iterationData.get(\"password\");\r",
+                      "const clientId = pm.iterationData.get(\"client_id\");\r",
+                      "const clientSecret = pm.iterationData.get(\"client_secret\");\r",
+                      "const expectedStatus = Number(pm.iterationData.get(\"expectedStatus\"));\r",
+                      "\r",
+                      "pm.variables.set(\"testCaseId\", \"AUTH-023\");\r",
+                      "pm.variables.set(\"expectedStatus\", 200);\r",
+                      "\r",
+                      "pm.variables.set(\"testCaseId\", testCaseId);\r",
+                      "pm.variables.set(\"expectedStatus\", expectedStatus);\r",
+                      "\r",
+                      "const body = {\r",
+                      "    grant_type: grantType,\r",
+                      "    client_id: clientId,\r",
+                      "    client_secret: clientSecret\r",
+                      "};\r",
+                      "\r",
+                      "// username\r",
+                      "if (username !== \"__MISSING__\") {\r",
+                      "    body.username = username;\r",
+                      "}\r",
+                      "\r",
+                      "if (password !== \"__MISSING__\") {\r",
+                      "    body.password = password;\r",
+                      "}\r",
+                      "\r",
+                      "pm.variables.set(\r",
+                      "    \"requestBody\",\r",
+                      "    JSON.stringify(body)\r",
+                      ");\r",
+                      "\r",
+                      "console.log(\"Test Case:\", testCaseId);\r",
+                      "console.log(\"Expected Status:\", expectedStatus);\r",
+                      "console.log(\"Request Body:\", body);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "const testCaseId = pm.variables.get(\"testCaseId\");\r",
+                      "const expectedStatus = Number(pm.variables.get(\"expectedStatus\"));\r",
+                      "\r",
+                      "const body = pm.response.json();\r",
+                      "\r",
+                      "pm.test(`${testCaseId} - Status code is ${expectedStatus}`, () => {\r",
+                      "    pm.response.to.have.status(expectedStatus);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(`${testCaseId} - Response is JSON`, () => {\r",
+                      "    pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+                      "        .to.include(\"application/json\");\r",
+                      "});\r",
+                      "\r",
+                      "if (expectedStatus === 200) {\r",
+                      "\r",
+                      "    const successSchema = {\r",
+                      "        type: \"object\",\r",
+                      "        required: [\r",
+                      "            \"access_token\",\r",
+                      "            \"token_type\",\r",
+                      "            \"expires_in\",\r",
+                      "            \"scope\"\r",
+                      "        ],\r",
+                      "        properties: {\r",
+                      "            access_token: { type: \"string\" },\r",
+                      "            token_type: { type: \"string\" },\r",
+                      "            expires_in: { type: \"number\" },\r",
+                      "            refresh_token: { type: \"string\" },\r",
+                      "            scope: { type: \"string\" },\r",
+                      "            create_At: { type: \"number\" }\r",
+                      "        }\r",
+                      "    };\r",
+                      "\r",
+                      "    pm.test(`${testCaseId} - Success schema is valid`, () => {\r",
+                      "        pm.response.to.have.jsonSchema(successSchema);\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(`${testCaseId} - Access token is returned`, () => {\r",
+                      "        pm.expect(body.access_token)\r",
+                      "            .to.be.a(\"string\")\r",
+                      "            .and.not.empty;\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(`${testCaseId} - Token type is Bearer`, () => {\r",
+                      "        pm.expect(body.token_type).to.eql(\"Bearer\");\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(`${testCaseId} - Token expires in 3600 seconds`, () => {\r",
+                      "        pm.expect(body.expires_in).to.eql(3600);\r",
+                      "    });\r",
+                      "}\r",
+                      "\r",
+                      "if (expectedStatus === 401) {\r",
+                      "\r",
+                      "    const errorSchema = {\r",
+                      "        type: \"object\",\r",
+                      "        required: [\r",
+                      "            \"success\",\r",
+                      "            \"error\"\r",
+                      "        ],\r",
+                      "        properties: {\r",
+                      "            success: {\r",
+                      "                type: \"boolean\"\r",
+                      "            },\r",
+                      "            error: {\r",
+                      "                type: \"object\",\r",
+                      "                required: [\r",
+                      "                    \"code\",\r",
+                      "                    \"message\"\r",
+                      "                ],\r",
+                      "                properties: {\r",
+                      "                    code: { type: \"string\" },\r",
+                      "                    message: { type: \"string\" }\r",
+                      "                }\r",
+                      "            }\r",
+                      "        }\r",
+                      "    };\r",
+                      "\r",
+                      "    pm.test(`${testCaseId} - Error schema is valid`, () => {\r",
+                      "        pm.response.to.have.jsonSchema(errorSchema);\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(`${testCaseId} - Success is false`, () => {\r",
+                      "        pm.expect(body.success).to.eql(false);\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(`${testCaseId} - Error code is returned`, () => {\r",
+                      "        pm.expect(body.error.code)\r",
+                      "            .to.be.a(\"string\")\r",
+                      "            .and.not.empty;\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(`${testCaseId} - Error message is returned`, () => {\r",
+                      "        pm.expect(body.error.message)\r",
+                      "            .to.be.a(\"string\")\r",
+                      "            .and.not.empty;\r",
+                      "    });\r",
+                      "}\r",
+                      "\r",
+                      "// get refresh token from password\r",
+                      "if (body.refresh_token) {\r",
+                      "    pm.environment.set(\"REFRESH_TOKEN\", body.refresh_token);\r",
+                      "\r",
+                      "    console.log(\r",
+                      "        \"Saved REFRESH_TOKEN:\",\r",
+                      "        body.refresh_token\r",
+                      "    );\r",
+                      "}"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "grant_type",
+                      "value": "password",
+                      "type": "text",
+                      "uuid": "7480b778-9795-4cd8-9817-4a7c69553657"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "{{OAUTH_CLIENT_ID}}",
+                      "type": "text",
+                      "uuid": "98bf1458-3323-4037-85df-27c57bcef727"
+                    },
+                    {
+                      "key": "client_secret",
+                      "value": "{{OAUTH_CLIENT_SECRET}}",
+                      "type": "text",
+                      "uuid": "0059ae31-9dc2-4b36-a5dd-026ef4e26977"
+                    },
+                    {
+                      "key": "username",
+                      "value": "{{BASIC_AUTH_USERNAME}}",
+                      "type": "text",
+                      "uuid": "ebdd2349-8044-48a6-80f9-5007dbc6db2c"
+                    },
+                    {
+                      "key": "password",
+                      "value": "{{BASIC_AUTH_PASSWORD}}",
+                      "type": "text",
+                      "uuid": "1f1aa686-9575-4c3d-9059-005dea7107a8"
+                    },
+                    {
+                      "key": "refresh_token",
+                      "value": "",
+                      "type": "text",
+                      "uuid": "9244098d-23a1-4cbc-9246-84b071a2b34e"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{API_BASE_URL}}/oauth/token",
+                  "host": [
+                    "{{API_BASE_URL}}"
+                  ],
+                  "path": [
+                    "oauth",
+                    "token"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "client_credentials",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "const testCaseId = pm.variables.get(\"testCaseId\");\r",
+                      "const expectedStatus = Number(pm.variables.get(\"expectedStatus\"));\r",
+                      "\r",
+                      "pm.test(`${testCaseId} - Status code is ${expectedStatus}`, () => {\r",
+                      "    pm.response.to.have.status(expectedStatus);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(`${testCaseId} - Response is JSON`, () => {\r",
+                      "    pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+                      "        .to.include(\"application/json\");\r",
+                      "});\r",
+                      "\r",
+                      "const body = pm.response.json();\r",
+                      "\r",
+                      "if (expectedStatus === 200) {\r",
+                      "\r",
+                      "    const successSchema = {\r",
+                      "        type: \"object\",\r",
+                      "        required: [\r",
+                      "            \"access_token\",\r",
+                      "            \"token_type\",\r",
+                      "            \"expires_in\",\r",
+                      "            \"scope\"\r",
+                      "        ],\r",
+                      "        properties: {\r",
+                      "            access_token: { type: \"string\" },\r",
+                      "            token_type: { type: \"string\" },\r",
+                      "            expires_in: { type: \"number\" },\r",
+                      "            refresh_token: { type: \"string\" },\r",
+                      "            scope: { type: \"string\" },\r",
+                      "            create_At: { type: \"number\" }\r",
+                      "        }\r",
+                      "    };\r",
+                      "\r",
+                      "    pm.test(`${testCaseId} - Success schema is valid`, () => {\r",
+                      "        pm.response.to.have.jsonSchema(successSchema);\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(`${testCaseId} - Access token is returned`, () => {\r",
+                      "        pm.expect(body.access_token)\r",
+                      "            .to.be.a(\"string\")\r",
+                      "            .and.not.empty;\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(`${testCaseId} - Token type is Bearer`, () => {\r",
+                      "        pm.expect(body.token_type).to.eql(\"Bearer\");\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(`${testCaseId} - Token expires in 3600 seconds`, () => {\r",
+                      "        pm.expect(body.expires_in).to.eql(3600);\r",
+                      "    });\r",
+                      "}\r",
+                      "\r",
+                      "\r",
+                      "if (expectedStatus === 401) {\r",
+                      "\r",
+                      "    const errorSchema = {\r",
+                      "        type: \"object\",\r",
+                      "        required: [\r",
+                      "            \"success\",\r",
+                      "            \"error\"\r",
+                      "        ],\r",
+                      "        properties: {\r",
+                      "            success: {\r",
+                      "                type: \"boolean\"\r",
+                      "            },\r",
+                      "            error: {\r",
+                      "                type: \"object\",\r",
+                      "                required: [\r",
+                      "                    \"code\",\r",
+                      "                    \"message\"\r",
+                      "                ],\r",
+                      "                properties: {\r",
+                      "                    code: { type: \"string\" },\r",
+                      "                    message: { type: \"string\" }\r",
+                      "                }\r",
+                      "            }\r",
+                      "        }\r",
+                      "    };\r",
+                      "\r",
+                      "    pm.test(`${testCaseId} - Error schema is valid`, () => {\r",
+                      "        pm.response.to.have.jsonSchema(errorSchema);\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(`${testCaseId} - Success is false`, () => {\r",
+                      "        pm.expect(body.success).to.eql(false);\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(`${testCaseId} - Error code is returned`, () => {\r",
+                      "        pm.expect(body.error.code)\r",
+                      "            .to.be.a(\"string\")\r",
+                      "            .and.not.empty;\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(`${testCaseId} - Error message is returned`, () => {\r",
+                      "        pm.expect(body.error.message)\r",
+                      "            .to.be.a(\"string\")\r",
+                      "            .and.not.empty;\r",
+                      "    });\r",
+                      "}"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "const testCaseId = pm.iterationData.get(\"testCaseId\");\r",
+                      "const grantType = pm.iterationData.get(\"grant_type\");\r",
+                      "const clientId = pm.iterationData.get(\"client_id\");\r",
+                      "const clientSecret = pm.iterationData.get(\"client_secret\");\r",
+                      "const expectedStatus = Number(pm.iterationData.get(\"expectedStatus\"));\r",
+                      "\r",
+                      "pm.variables.set(\"testCaseId\", \"AUTH-018\");\r",
+                      "pm.variables.set(\"expectedStatus\", 200);\r",
+                      "\r",
+                      "pm.variables.set(\"testCaseId\", testCaseId);\r",
+                      "pm.variables.set(\"expectedStatus\", expectedStatus);\r",
+                      "\r",
+                      "const body = {\r",
+                      "    grant_type: grantType\r",
+                      "};\r",
+                      "\r",
+                      "if (clientId !== \"__MISSING__\") {\r",
+                      "    if (testCaseId === \"AUTH-021\") {\r",
+                      "        body.client_id = Number(clientId);\r",
+                      "    } else {\r",
+                      "        body.client_id = clientId;\r",
+                      "    }\r",
+                      "}\r",
+                      "\r",
+                      "if (clientSecret !== \"__MISSING__\") {\r",
+                      "    if (testCaseId === \"AUTH-022\") {\r",
+                      "        body.client_secret = Number(clientSecret);\r",
+                      "    } else {\r",
+                      "        body.client_secret = clientSecret;\r",
+                      "    }\r",
+                      "}\r",
+                      "\r",
+                      "pm.variables.set(\"requestBody\", JSON.stringify(body));\r",
+                      "\r",
+                      "console.log(\"Test Case:\", testCaseId);\r",
+                      "console.log(\"Request Body:\", body);\r",
+                      "console.log(\"Expected Status:\", expectedStatus);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"grant_type\": \"{{grant_type}}\",\r\n  \"client_id\": \"{{client_id}}\",\r\n  \"client_secret\": \"{{client_secret}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{API_BASE_URL}}/oauth/token",
+                  "host": [
+                    "{{API_BASE_URL}}"
+                  ],
+                  "path": [
+                    "oauth",
+                    "token"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "refresh_token",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "const testCaseId = pm.iterationData.get(\"testCaseId\");\r",
+                      "const expectedStatus = Number(pm.iterationData.get(\"expectedStatus\"));\r",
+                      "\r",
+                      "let refreshToken = pm.iterationData.get(\"refresh_token\");\r",
+                      "\r",
+                      "if (refreshToken === \"__VALID_REFRESH_TOKEN__\") {\r",
+                      "    refreshToken = pm.environment.get(\"REFRESH_TOKEN\");\r",
+                      "}\r",
+                      "\r",
+                      "pm.variables.set(\"testCaseId\", testCaseId);\r",
+                      "pm.variables.set(\"expectedStatus\", expectedStatus);\r",
+                      "pm.variables.set(\"refresh_token\", refreshToken);\r",
+                      "\r",
+                      "console.log(\"Test Case:\", testCaseId);\r",
+                      "console.log(\"Expected Status:\", expectedStatus);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "const testCaseId = pm.variables.get(\"testCaseId\");\r",
+                      "const expectedStatus = Number(pm.variables.get(\"expectedStatus\"));\r",
+                      "\r",
+                      "pm.test(`${testCaseId} - Status code is ${expectedStatus}`, () => {\r",
+                      "    pm.response.to.have.status(expectedStatus);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(`${testCaseId} - Response is JSON`, () => {\r",
+                      "    pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+                      "        .to.include(\"application/json\");\r",
+                      "});\r",
+                      "\r",
+                      "let body;\r",
+                      "\r",
+                      "try {\r",
+                      "    body = pm.response.json();\r",
+                      "} catch (error) {\r",
+                      "    pm.test(`${testCaseId} - Response body is valid JSON`, () => {\r",
+                      "        pm.expect.fail(\"Response body is not valid JSON\");\r",
+                      "    });\r",
+                      "    return;\r",
+                      "}\r",
+                      "\r",
+                      "// AUTH-013\r",
+                      "if (expectedStatus === 200) {\r",
+                      "    const successSchema = {\r",
+                      "        type: \"object\",\r",
+                      "        required: [\r",
+                      "            \"access_token\",\r",
+                      "            \"token_type\",\r",
+                      "            \"expires_in\",\r",
+                      "            \"scope\"\r",
+                      "        ],\r",
+                      "        properties: {\r",
+                      "            access_token: { type: \"string\" },\r",
+                      "            token_type: { type: \"string\" },\r",
+                      "            expires_in: { type: \"number\" },\r",
+                      "            refresh_token: { type: \"string\" },\r",
+                      "            scope: { type: \"string\" },\r",
+                      "            create_At: { type: \"number\" }\r",
+                      "        }\r",
+                      "    };\r",
+                      "\r",
+                      "    pm.test(`${testCaseId} - Success schema is valid`, () => {\r",
+                      "        pm.response.to.have.jsonSchema(successSchema);\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(`${testCaseId} - Access token is returned`, () => {\r",
+                      "        pm.expect(body.access_token)\r",
+                      "            .to.be.a(\"string\")\r",
+                      "            .and.not.empty;\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(`${testCaseId} - Token type is Bearer`, () => {\r",
+                      "        pm.expect(body.token_type).to.eql(\"Bearer\");\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(`${testCaseId} - Token expires in 3600 seconds`, () => {\r",
+                      "        pm.expect(body.expires_in).to.eql(3600);\r",
+                      "    });\r",
+                      "}\r",
+                      "\r",
+                      "// AUTH-014\r",
+                      "if (expectedStatus === 401) {\r",
+                      "    const errorSchema = {\r",
+                      "        type: \"object\",\r",
+                      "        required: [\"success\", \"error\"],\r",
+                      "        properties: {\r",
+                      "            success: { type: \"boolean\" },\r",
+                      "            error: {\r",
+                      "                type: \"object\",\r",
+                      "                required: [\"code\", \"message\"],\r",
+                      "                properties: {\r",
+                      "                    code: { type: \"string\" },\r",
+                      "                    message: { type: \"string\" }\r",
+                      "                }\r",
+                      "            }\r",
+                      "        }\r",
+                      "    };\r",
+                      "\r",
+                      "    pm.test(`${testCaseId} - Error schema is valid`, () => {\r",
+                      "        pm.response.to.have.jsonSchema(errorSchema);\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(`${testCaseId} - Success is false`, () => {\r",
+                      "        pm.expect(body.success).to.eql(false);\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(`${testCaseId} - Error code is returned`, () => {\r",
+                      "        pm.expect(body.error.code)\r",
+                      "            .to.be.a(\"string\")\r",
+                      "            .and.not.empty;\r",
+                      "    });\r",
+                      "\r",
+                      "    pm.test(`${testCaseId} - Error message is returned`, () => {\r",
+                      "        pm.expect(body.error.message)\r",
+                      "            .to.be.a(\"string\")\r",
+                      "            .and.not.empty;\r",
+                      "    });\r",
+                      "}"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"grant_type\": \"refresh_token\",\r\n  \"refresh_token\": \"{{refresh_token}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{API_BASE_URL}}/oauth/token",
+                  "host": [
+                    "{{API_BASE_URL}}"
+                  ],
+                  "path": [
+                    "oauth",
+                    "token"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "User demo",
+          "item": [
+            {
+              "name": "User Demo",
+              "request": {
+                "method": "GET",
+                "header": []
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Create User",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function () {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response indicates failure\", function () {\r",
+                  "    const jsonData = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(jsonData.success).to.eql(false);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "value",
+                  "value": "demo-api-key-123",
+                  "type": "string"
+                },
+                {
+                  "key": "key",
+                  "value": "X-API-Key",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/plain",
+                "type": "text",
+                "disabled": true
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"client_id\": \"demo-client\",\r\n    \"client_secret\": \"demo-secret-789\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://billpay-api.gauravkhurana-practice-api.workers.dev/oauth/token",
+              "protocol": "https",
+              "host": [
+                "billpay-api",
+                "gauravkhurana-practice-api",
+                "workers",
+                "dev"
+              ],
+              "path": [
+                "oauth",
+                "token"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "",
+                  "description": " ",
+                  "disabled": true
+                },
+                {
+                  "key": "kyc_status",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "limit",
+                  "value": "",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Users",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "List User By Id",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PATCH",
+            "header": []
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": []
+    },
+    {
+      "name": "PaymentMethod",
+      "item": []
+    },
+    {
+      "name": "Bills",
+      "item": []
+    },
+    {
+      "name": "Billers",
+      "item": []
+    }
+  ]
+}

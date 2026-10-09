@@ -1,0 +1,16 @@
+{
+  "endpoint": "GET /v1/users",
+  "params": {
+    "limit": false
+  },
+  "status": 500,
+  "responseBody": {
+    "success": false,
+    "error": {
+      "code": "DATABASE_ERROR",
+      "message": "Failed to fetch users",
+      "traceId": "29b2fa0b-3d6d-49d1-bc31-df7d0668f280",
+      "timestamp": "2026-10-09T07:52:49.657Z"
+    }
+  }
+}

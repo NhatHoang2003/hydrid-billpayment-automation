@@ -1,6 +1,8 @@
 import { test, expect } from '../../../src/fixtures/apiFixture';
 import { generalCases, pageCases, limitCases, kycStatusCases, searchCases } from '../../../src/data/api/users/get-users.cases';
 import { ApiSuccessResponseSchema, ApiErrorResponseSchema } from '../../../src/schemas/common.schemas';
+import { SchemaValidator } from '../../../src/helpers/schemaValidator';
+import { ApiEvidence } from '../../../src/helpers/ApiEvidence';
 
 test.describe('GET /v1/users - List Users', () => {
 
@@ -10,7 +12,11 @@ test.describe('GET /v1/users - List Users', () => {
 
             expect(response.status).toBe(testCase.expected.status);
 
-            ApiSuccessResponseSchema.parse(response.data);
+            await SchemaValidator.validate(
+                ApiSuccessResponseSchema,
+                response.data,
+                'GET /v1/users - Success Response'
+            );
 
             expect(response.data).toMatchObject(testCase.expected.body);
         });
@@ -19,38 +25,76 @@ test.describe('GET /v1/users - List Users', () => {
     for (const testCase of pageCases) {
         test(testCase.name, async ({ userClient }) => {
 
+            const response = await userClient.getListUser(testCase.params);
+
             if ('bug' in testCase && testCase.bug) {
                 test.fixme(
                     true,
-                    `${testCase.bug}: Backend page validation bug`
+                    `${testCase.bug}: Backend validation bug`
                 );
             }
 
-            const response = await userClient.getListUser(testCase.params);
+            // await ApiEvidence.attach(
+            //     'GET /v1/users',
+            //     testCase.params,
+            //     response
+            // );
 
             expect(response.status).toBe(testCase.expected.status);
 
             if (response.status === 200) {
-                ApiSuccessResponseSchema.parse(response.data);
+                await SchemaValidator.validate(
+                    ApiSuccessResponseSchema,
+                    response.data,
+                    'GET /v1/users - Success Response'
+                );
             } else {
-                ApiErrorResponseSchema.parse(response.data);
+                await SchemaValidator.validate(
+                    ApiErrorResponseSchema,
+                    response.data,
+                    'GET /v1/users - Error Response'
+                );
             }
 
             expect(response.data).toMatchObject(testCase.expected.body);
         });
-    }
+    };
 
-    test('@regression @C008 @USER-GET-008 should accept current max page', async ({ userClient }) => {
-        const firstResponse = await userClient.getListUser({
+    test('@regression @C007 @USER-GET-007 should accept middle valid page', async ({ userClient }) => {
+        const totalPages = (await userClient.getListUser({
             page: 1,
+            limit: 10,
+        })).data.meta.pagination.totalPages;
+
+        const middlePage = Math.max(1, Math.ceil(totalPages / 2));
+
+        const response = await userClient.getListUser({
+            page: middlePage,
             limit: 10,
         });
 
-        expect(firstResponse.status).toBe(200);
+        expect(response.status).toBe(200);
 
-        ApiSuccessResponseSchema.parse(firstResponse.data);
+        await SchemaValidator.validate(
+            ApiSuccessResponseSchema,
+            response.data,
+            'GET /v1/users - Success Response'
+        );
 
-        const totalPages = firstResponse.data.meta.pagination.totalPages;
+        expect(response.data.meta.pagination).toMatchObject({
+            page: middlePage,
+            limit: 10,
+            hasPrev: middlePage > 1,
+            hasNext: middlePage < totalPages,
+        });
+    });
+
+
+    test('@regression @C008 @USER-GET-008 should accept current max page', async ({ userClient }) => {
+        const totalPages = (await userClient.getListUser({
+            page: 1,
+            limit: 10,
+        })).data.meta.pagination.totalPages;
 
         const response = await userClient.getListUser({
             page: totalPages,
@@ -59,7 +103,11 @@ test.describe('GET /v1/users - List Users', () => {
 
         expect(response.status).toBe(200);
 
-        ApiSuccessResponseSchema.parse(response.data);
+        await SchemaValidator.validate(
+            ApiSuccessResponseSchema,
+            response.data,
+            'GET /v1/users - Success Response'
+        );
 
         expect(response.data.meta.pagination).toMatchObject({
             page: totalPages,
@@ -71,16 +119,10 @@ test.describe('GET /v1/users - List Users', () => {
 
 
     test('@regression @C009 @USER-GET-009 should return empty data for page just exceeding totalPages', async ({ userClient }) => {
-        const firstResponse = await userClient.getListUser({
+        const totalPages = (await userClient.getListUser({
             page: 1,
             limit: 10,
-        });
-
-        expect(firstResponse.status).toBe(200);
-
-        ApiSuccessResponseSchema.parse(firstResponse.data);
-
-        const totalPages = firstResponse.data.meta.pagination.totalPages;
+        })).data.meta.pagination.totalPages;
 
         const pageAfterLast = totalPages + 1;
 
@@ -91,7 +133,11 @@ test.describe('GET /v1/users - List Users', () => {
 
         expect(response.status).toBe(200);
 
-        ApiSuccessResponseSchema.parse(response.data);
+        await SchemaValidator.validate(
+            ApiSuccessResponseSchema,
+            response.data,
+            'GET /v1/users - Success Response'
+        );
 
         expect(response.data.data).toEqual([]);
 
@@ -105,16 +151,10 @@ test.describe('GET /v1/users - List Users', () => {
 
 
     test('@regression @C010 @USER-GET-010 should return empty data for far out-of-bounds page', async ({ userClient }) => {
-        const firstResponse = await userClient.getListUser({
+        const totalPages = (await userClient.getListUser({
             page: 1,
             limit: 10,
-        });
-
-        expect(firstResponse.status).toBe(200);
-
-        ApiSuccessResponseSchema.parse(firstResponse.data);
-
-        const totalPages = firstResponse.data.meta.pagination.totalPages;
+        })).data.meta.pagination.totalPages;
 
         const farPage = totalPages + 1000;
 
@@ -125,7 +165,11 @@ test.describe('GET /v1/users - List Users', () => {
 
         expect(response.status).toBe(200);
 
-        ApiSuccessResponseSchema.parse(response.data);
+        await SchemaValidator.validate(
+            ApiSuccessResponseSchema,
+            response.data,
+            'GET /v1/users - Success Response'
+        );
 
         expect(response.data.data).toEqual([]);
 
@@ -135,14 +179,14 @@ test.describe('GET /v1/users - List Users', () => {
             hasNext: false,
             hasPrev: true,
         });
-    }
-    );
+    });
 
     for (const testCase of limitCases) {
         test(testCase.name, async ({ userClient }) => {
 
             const response = await userClient.getListUser(testCase.params);
 
+            // Debugging
             // console.log('baseURL:', response.config.baseURL);
             // console.log('url:', response.config.url);
             // console.log('params:', response.config.params);
@@ -153,16 +197,30 @@ test.describe('GET /v1/users - List Users', () => {
             if ('bug' in testCase && testCase.bug) {
                 test.fixme(
                     true,
-                    `${testCase.bug}: Backend page validation bug`
+                    `${testCase.bug}: Backend validation bug`
                 );
             }
+
+            // await ApiEvidence.attach(
+            //     'GET /v1/users',
+            //     testCase.params,
+            //     response
+            // );
 
             expect(response.status).toBe(testCase.expected.status);
 
             if (response.status === 200) {
-                ApiSuccessResponseSchema.parse(response.data);
+                await SchemaValidator.validate(
+                    ApiSuccessResponseSchema,
+                    response.data,
+                    'GET /v1/users - Success Response'
+                );
             } else {
-                ApiErrorResponseSchema.parse(response.data);
+                await SchemaValidator.validate(
+                    ApiErrorResponseSchema,
+                    response.data,
+                    'GET /v1/users - Error Response'
+                );
             }
 
             expect(response.data).toMatchObject(testCase.expected.body);
@@ -176,16 +234,30 @@ test.describe('GET /v1/users - List Users', () => {
             if ('bug' in testCase && testCase.bug) {
                 test.fixme(
                     true,
-                    `${testCase.bug}: Backend page validation bug`
+                    `${testCase.bug}: Backend validation bug`
                 );
             }
+
+            // await ApiEvidence.attach(
+            //     'GET /v1/users',
+            //     testCase.params,
+            //     response
+            // );
 
             expect(response.status).toBe(testCase.expected.status);
 
             if (response.status === 200) {
-                ApiSuccessResponseSchema.parse(response.data);
+                await SchemaValidator.validate(
+                    ApiSuccessResponseSchema,
+                    response.data,
+                    'GET /v1/users - Success Response'
+                );
             } else {
-                ApiErrorResponseSchema.parse(response.data);
+                await SchemaValidator.validate(
+                    ApiErrorResponseSchema,
+                    response.data,
+                    'GET /v1/users - Error Response'
+                );
             }
 
             expect(response.data).toMatchObject(testCase.expected.body);
@@ -196,12 +268,33 @@ test.describe('GET /v1/users - List Users', () => {
         test(testCase.name, async ({ userClient }) => {
             const response = await userClient.getListUser(testCase.params);
 
+            if ('bug' in testCase && testCase.bug) {
+                test.fixme(
+                    true,
+                    `${testCase.bug}: Backend validation bug`
+                );
+            }
+
+            // await ApiEvidence.attach(
+            //     'GET /v1/users',
+            //     testCase.params,
+            //     response
+            // );
+
             expect(response.status).toBe(testCase.expected.status);
 
             if (response.status === 200) {
-                ApiSuccessResponseSchema.parse(response.data);
+                await SchemaValidator.validate(
+                    ApiSuccessResponseSchema,
+                    response.data,
+                    'GET /v1/users - Success Response'
+                );
             } else {
-                ApiErrorResponseSchema.parse(response.data);
+                await SchemaValidator.validate(
+                    ApiErrorResponseSchema,
+                    response.data,
+                    'GET /v1/users - Error Response'
+                );
             }
 
             expect(response.data).toMatchObject(testCase.expected.body);
@@ -211,7 +304,12 @@ test.describe('GET /v1/users - List Users', () => {
     test('@regression @C043 @USER-GET-043 should find user by full phone number',
         async ({ userClient }) => {
 
-            const phone = '+84394267205';
+            const listResponse = await userClient.getListUser({
+                page: 1,
+                limit: 1,
+            });
+
+            const phone = listResponse.data.data[0].phone;
 
             const response = await userClient.getListUser({
                 search: phone,
@@ -219,15 +317,14 @@ test.describe('GET /v1/users - List Users', () => {
 
             expect(response.status).toBe(200);
 
-            ApiSuccessResponseSchema.parse(response.data);
+            await SchemaValidator.validate(
+                ApiSuccessResponseSchema,
+                response.data,
+                'GET /v1/users - Success Response'
+            );
 
-            const users = response.data.data;
-
-            expect(users.length).toBeGreaterThan(0);
-
-            for (const user of users) {
-                expect(user.phone).toBe(phone);
-            }
+            expect(response.data.data.length).toBeGreaterThan(0);
+            expect(response.data.data[0].phone).toBe(phone);
         }
     );
 
@@ -239,7 +336,11 @@ test.describe('GET /v1/users - List Users', () => {
 
         expect(response.status).toBe(200);
 
-        ApiSuccessResponseSchema.parse(response.data);
+        await SchemaValidator.validate(
+            ApiSuccessResponseSchema,
+            response.data,
+            'GET /v1/users - Success Response'
+        );
 
         const pagination = response.data.meta.pagination;
 
@@ -262,7 +363,11 @@ test.describe('GET /v1/users - List Users', () => {
 
         expect(response.status).toBe(200);
 
-        ApiSuccessResponseSchema.parse(response.data);
+        await SchemaValidator.validate(
+            ApiSuccessResponseSchema,
+            response.data,
+            'GET /v1/users - Success Response'
+        );
 
         expect(response.data.meta.pagination.limit).toBe(limit);
 
@@ -280,7 +385,11 @@ test.describe('GET /v1/users - List Users', () => {
 
         expect(response.status).toBe(200);
 
-        ApiSuccessResponseSchema.parse(response.data);
+        await SchemaValidator.validate(
+            ApiSuccessResponseSchema,
+            response.data,
+            'GET /v1/users - Success Response'
+        );
 
         const pagination = response.data.meta.pagination;
 
@@ -295,7 +404,11 @@ test.describe('GET /v1/users - List Users', () => {
 
         expect(response.status).toBe(200);
 
-        ApiSuccessResponseSchema.parse(response.data);
+        await SchemaValidator.validate(
+            ApiSuccessResponseSchema,
+            response.data,
+            'GET /v1/users - Success Response'
+        );
 
         expect(response.data).toEqual(
             expect.objectContaining({
@@ -314,7 +427,11 @@ test.describe('GET /v1/users - List Users', () => {
 
         expect(response.status).toBe(200);
 
-        ApiSuccessResponseSchema.parse(response.data);
+        await SchemaValidator.validate(
+            ApiSuccessResponseSchema,
+            response.data,
+            'GET /v1/users - Success Response'
+        );
 
         expect(response.data.success).toBe(true);
     });

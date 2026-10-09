@@ -1,0 +1,4 @@
+testCaseId,grant_type,expectedStatus
+AUTH-007,__MISSING__,400
+AUTH-008,unsupported_grant,400
+AUTH-017,__EMPTY_BODY__,400

@@ -1,0 +1,25 @@
+{
+  "endpoint": "GET /v1/users",
+  "params": {
+    "page": 9007199254740992
+  },
+  "status": 200,
+  "responseBody": {
+    "success": true,
+    "data": [],
+    "meta": {
+      "requestId": "0107db6e-287a-420b-8b9b-2823cdd4ea5d",
+      "timestamp": "2026-10-09T07:59:47.168Z",
+      "version": "v1",
+      "pagination": {
+        "page": 9007199254740992,
+        "limit": 10,
+        "total": 2993,
+        "totalPages": 300,
+        "hasNext": false,
+        "hasPrev": true,
+        "offset": 90071992547409900
+      }
+    }
+  }
+}

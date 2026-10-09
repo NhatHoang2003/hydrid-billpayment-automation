@@ -27,7 +27,7 @@ test.describe('POST /oauth/token - Client Credentials Grant', () => {
     }
     );
 
-    test('@regression @C018 @AUTH-018 should return an access token with valid form-encoded credentials', async ({ authClient }) => {
+    test('@regression @C018 @AUTH-018 should return an access token with valid form-urlencoded credentials', async ({ authClient }) => {
         const payload = new URLSearchParams({
             grant_type: 'client_credentials',
             client_id: 'demo-client',

@@ -8,3 +8,5 @@ playwright/.auth/
 
 # Environment
 .env
+.env.*
+!.env.example

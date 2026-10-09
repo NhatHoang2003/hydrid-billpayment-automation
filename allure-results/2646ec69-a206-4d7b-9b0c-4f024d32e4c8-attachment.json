@@ -1,0 +1,190 @@
+{
+  "endpoint": "GET /v1/users",
+  "params": {
+    "search": "gmail.com"
+  },
+  "status": 200,
+  "responseBody": {
+    "success": true,
+    "data": [
+      {
+        "id": "user-65dde39e",
+        "email": "supreme@gmail.com",
+        "phone": null,
+        "firstName": "supreme_name",
+        "lastName": "supreme_lastname",
+        "kycStatus": "pending",
+        "createdAt": "2026-09-18T08:59:39.573Z",
+        "updatedAt": "2026-09-18T08:59:39.573Z"
+      },
+      {
+        "id": "user-d75ab34b",
+        "email": "gaurav.khuraana@gmail.com",
+        "phone": "+918826282808",
+        "firstName": "Gaurav",
+        "lastName": "Khurana",
+        "kycStatus": "pending",
+        "createdAt": "2026-08-26T12:19:00.695Z",
+        "updatedAt": "2026-08-26T12:19:00.695Z"
+      },
+      {
+        "id": "user-beab3edb",
+        "email": "hoang@gmail.com",
+        "phone": "+84394267205",
+        "firstName": "Nguyễn Văn A",
+        "lastName": null,
+        "kycStatus": "pending",
+        "address": {
+          "line1": "Lái Thiêu",
+          "line2": null,
+          "city": "Bình Dương",
+          "state": null,
+          "postalCode": "700000",
+          "country": "IN"
+        },
+        "createdAt": "2026-08-13T11:17:11.704Z",
+        "updatedAt": "2026-08-27T08:01:27.562Z"
+      },
+      {
+        "id": "user-ae796a55",
+        "email": "Keaton48@gmail.com",
+        "phone": "+91633-756-0141",
+        "firstName": "Theresa",
+        "lastName": "Okuneva",
+        "kycStatus": "pending",
+        "address": {
+          "line1": "40423 Menon Parkways",
+          "line2": null,
+          "city": "Sikanderpur",
+          "state": "RJ",
+          "postalCode": "450828",
+          "country": "IN"
+        },
+        "createdAt": "2026-07-22T14:12:48.944Z",
+        "updatedAt": "2026-07-22T14:12:48.944Z"
+      },
+      {
+        "id": "user-840f5fc9",
+        "email": "Marshall13@gmail.com",
+        "phone": "+91825-230-0514",
+        "firstName": "Harvey",
+        "lastName": "Tillman",
+        "kycStatus": "pending",
+        "address": {
+          "line1": "86620 Varrier Junctions",
+          "line2": null,
+          "city": "Kyathampalle",
+          "state": "CH",
+          "postalCode": "777656",
+          "country": "IN"
+        },
+        "createdAt": "2026-07-22T14:12:43.920Z",
+        "updatedAt": "2026-07-22T14:12:43.920Z"
+      },
+      {
+        "id": "user-81bbb55d",
+        "email": "Maggie.Hoppe@gmail.com",
+        "phone": "+919819459812",
+        "firstName": "Linwood",
+        "lastName": "Hayes",
+        "kycStatus": "pending",
+        "address": {
+          "line1": "3129 Bhupati Trail",
+          "line2": null,
+          "city": "Muddebihal",
+          "state": "GJ",
+          "postalCode": "289217",
+          "country": "IN"
+        },
+        "createdAt": "2026-07-22T14:12:38.689Z",
+        "updatedAt": "2026-07-22T14:12:38.689Z"
+      },
+      {
+        "id": "user-0515f679",
+        "email": "Nora.Gleichner@gmail.com",
+        "phone": "+91-697-5552881",
+        "firstName": "Greg",
+        "lastName": "Bogisich",
+        "kycStatus": "pending",
+        "address": {
+          "line1": "94698 Narendra Manors",
+          "line2": null,
+          "city": "Sherkot",
+          "state": "ML",
+          "postalCode": "625446",
+          "country": "IN"
+        },
+        "createdAt": "2026-07-22T14:12:32.939Z",
+        "updatedAt": "2026-07-22T14:12:32.939Z"
+      },
+      {
+        "id": "user-5914d87e",
+        "email": "Delores72@gmail.com",
+        "phone": "+91955-598-8108",
+        "firstName": "Orion",
+        "lastName": "Reichert",
+        "kycStatus": "pending",
+        "address": {
+          "line1": "30250 Baala Landing",
+          "line2": null,
+          "city": "Nirmal",
+          "state": "TN",
+          "postalCode": "028142",
+          "country": "IN"
+        },
+        "createdAt": "2026-07-22T14:12:22.007Z",
+        "updatedAt": "2026-07-22T14:12:22.007Z"
+      },
+      {
+        "id": "user-161e2ab7",
+        "email": "May93@gmail.com",
+        "phone": "+918132083925",
+        "firstName": "Susana",
+        "lastName": "Yost",
+        "kycStatus": "pending",
+        "address": {
+          "line1": "39183 Kalpana Wall",
+          "line2": null,
+          "city": "Vellore",
+          "state": "TN",
+          "postalCode": "156987",
+          "country": "IN"
+        },
+        "createdAt": "2026-07-22T14:12:15.552Z",
+        "updatedAt": "2026-07-22T14:12:15.552Z"
+      },
+      {
+        "id": "user-972e35c7",
+        "email": "Brandon_OHara@gmail.com",
+        "phone": "+91934-586-3854",
+        "firstName": "Kip",
+        "lastName": "Senger",
+        "kycStatus": "pending",
+        "address": {
+          "line1": "9947 Varma Ville",
+          "line2": null,
+          "city": "Sanawad",
+          "state": "KA",
+          "postalCode": "562344",
+          "country": "IN"
+        },
+        "createdAt": "2026-07-22T14:12:02.776Z",
+        "updatedAt": "2026-07-22T14:12:02.776Z"
+      }
+    ],
+    "meta": {
+      "requestId": "5cb4da03-8d1c-4dda-9a97-2fa030f49a73",
+      "timestamp": "2026-10-09T08:00:08.453Z",
+      "version": "v1",
+      "pagination": {
+        "page": 1,
+        "limit": 10,
+        "total": 513,
+        "totalPages": 52,
+        "hasNext": true,
+        "hasPrev": false,
+        "offset": 0
+      }
+    }
+  }
+}

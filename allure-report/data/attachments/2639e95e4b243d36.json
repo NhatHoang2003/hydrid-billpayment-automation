@@ -1,0 +1,44 @@
+{
+  "endpoint": "GET /v1/users",
+  "params": {
+    "search": "hoang@gmail.com"
+  },
+  "status": 200,
+  "responseBody": {
+    "success": true,
+    "data": [
+      {
+        "id": "user-beab3edb",
+        "email": "hoang@gmail.com",
+        "phone": "+84394267205",
+        "firstName": "Nguyễn Văn A",
+        "lastName": null,
+        "kycStatus": "pending",
+        "address": {
+          "line1": "Lái Thiêu",
+          "line2": null,
+          "city": "Bình Dương",
+          "state": null,
+          "postalCode": "700000",
+          "country": "IN"
+        },
+        "createdAt": "2026-08-13T11:17:11.704Z",
+        "updatedAt": "2026-08-27T08:01:27.562Z"
+      }
+    ],
+    "meta": {
+      "requestId": "326f3d61-90c7-4fa4-a15f-deb50569b0bb",
+      "timestamp": "2026-10-09T07:52:51.769Z",
+      "version": "v1",
+      "pagination": {
+        "page": 1,
+        "limit": 10,
+        "total": 1,
+        "totalPages": 1,
+        "hasNext": false,
+        "hasPrev": false,
+        "offset": 0
+      }
+    }
+  }
+}

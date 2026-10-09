@@ -1,0 +1,25 @@
+{
+  "endpoint": "GET /v1/users",
+  "params": {
+    "search": "NGUYỄN VĂN A"
+  },
+  "status": 200,
+  "responseBody": {
+    "success": true,
+    "data": [],
+    "meta": {
+      "requestId": "a6902bb3-e397-4252-87d0-fc32c04eadb1",
+      "timestamp": "2026-10-09T07:52:52.411Z",
+      "version": "v1",
+      "pagination": {
+        "page": 1,
+        "limit": 10,
+        "total": 0,
+        "totalPages": 0,
+        "hasNext": false,
+        "hasPrev": false,
+        "offset": 0
+      }
+    }
+  }
+}

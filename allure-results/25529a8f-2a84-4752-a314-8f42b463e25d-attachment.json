@@ -1,0 +1,126 @@
+{
+  "endpoint": "GET /v1/users",
+  "params": {
+    "search": "Nguyễn"
+  },
+  "status": 200,
+  "responseBody": {
+    "success": true,
+    "data": [
+      {
+        "id": "user-d908899d",
+        "email": "test-user.obaz4v@example.com",
+        "phone": null,
+        "firstName": "Nguyễn",
+        "lastName": "Hoàng",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-03T17:09:04.474Z",
+        "updatedAt": "2026-10-03T17:09:04.474Z"
+      },
+      {
+        "id": "user-d1ecc49f",
+        "email": "test-user.gqvi43@example.com",
+        "phone": null,
+        "firstName": "Nguyễn",
+        "lastName": "Hoàng",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-03T16:54:08.318Z",
+        "updatedAt": "2026-10-03T16:54:08.318Z"
+      },
+      {
+        "id": "user-67681941",
+        "email": "test-user.1mat20@example.com",
+        "phone": null,
+        "firstName": "Nguyễn",
+        "lastName": "Hoàng",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-03T15:11:36.491Z",
+        "updatedAt": "2026-10-03T15:11:36.491Z"
+      },
+      {
+        "id": "user-5e292347",
+        "email": "test-user.z3tp3n@example.com",
+        "phone": null,
+        "firstName": "Nguyễn",
+        "lastName": "Hoàng",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-02T07:50:12.110Z",
+        "updatedAt": "2026-10-02T07:50:12.110Z"
+      },
+      {
+        "id": "user-dc5ad171",
+        "email": "test-user.etxys7@example.com",
+        "phone": null,
+        "firstName": "Nguyễn",
+        "lastName": "Hoàng",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-02T07:42:19.624Z",
+        "updatedAt": "2026-10-02T07:42:19.624Z"
+      },
+      {
+        "id": "user-1cd04834",
+        "email": "test-user.vwkxxu@example.com",
+        "phone": null,
+        "firstName": "Nguyễn",
+        "lastName": "Hoàng",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-02T07:40:34.792Z",
+        "updatedAt": "2026-10-02T07:40:34.792Z"
+      },
+      {
+        "id": "user-4deec620",
+        "email": "test-user.z83dgv@example.com",
+        "phone": null,
+        "firstName": "Nguyễn",
+        "lastName": "Hoàng",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-02T07:38:57.687Z",
+        "updatedAt": "2026-10-02T07:38:57.687Z"
+      },
+      {
+        "id": "user-186070f0",
+        "email": "test-user.4gz7vf@example.com",
+        "phone": null,
+        "firstName": "Nguyễn",
+        "lastName": "Hoàng",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-01T08:13:17.676Z",
+        "updatedAt": "2026-10-01T08:13:17.676Z"
+      },
+      {
+        "id": "user-ed831838",
+        "email": "test-user.rtjyg7@example.com",
+        "phone": null,
+        "firstName": "Nguyễn",
+        "lastName": "Hoàng",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-01T08:08:33.449Z",
+        "updatedAt": "2026-10-01T08:08:33.449Z"
+      },
+      {
+        "id": "user-efeaeff9",
+        "email": "test-user.p61cs4@example.com",
+        "phone": null,
+        "firstName": "Nguyễn",
+        "lastName": "Hoàng",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-01T08:00:32.516Z",
+        "updatedAt": "2026-10-01T08:00:32.516Z"
+      }
+    ],
+    "meta": {
+      "requestId": "ad813c3c-e680-41d8-9882-bd5fe89ab44b",
+      "timestamp": "2026-10-09T07:52:51.413Z",
+      "version": "v1",
+      "pagination": {
+        "page": 1,
+        "limit": 10,
+        "total": 197,
+        "totalPages": 20,
+        "hasNext": true,
+        "hasPrev": false,
+        "offset": 0
+      }
+    }
+  }
+}

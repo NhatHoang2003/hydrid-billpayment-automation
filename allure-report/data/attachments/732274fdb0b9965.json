@@ -1,0 +1,25 @@
+{
+  "endpoint": "GET /v1/users",
+  "params": {
+    "kyc_status": "VERIFIED"
+  },
+  "status": 200,
+  "responseBody": {
+    "success": true,
+    "data": [],
+    "meta": {
+      "requestId": "d1406ed4-75b0-478f-8879-c2cacbba6404",
+      "timestamp": "2026-10-09T07:52:49.832Z",
+      "version": "v1",
+      "pagination": {
+        "page": 1,
+        "limit": 10,
+        "total": 0,
+        "totalPages": 0,
+        "hasNext": false,
+        "hasPrev": false,
+        "offset": 0
+      }
+    }
+  }
+}

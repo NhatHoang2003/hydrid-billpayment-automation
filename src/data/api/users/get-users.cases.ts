@@ -97,24 +97,6 @@ export const pageCases = [
     },
 
     {
-        name: '@regression @C007 @USER-GET-007 should accept middle valid page',
-        params: { page: 75 },
-        expected: {
-            status: 200,
-            body: {
-                success: true,
-                meta: {
-                    pagination: {
-                        page: 75,
-                        limit: 10,
-                        hasPrev: true,
-                    },
-                },
-            },
-        },
-    },
-
-    {
         name: '@regression @C011 @USER-GET-011 should reject page = 0',
         params: { page: 0 },
         expected: {

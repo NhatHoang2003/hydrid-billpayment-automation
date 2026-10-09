@@ -1,0 +1,534 @@
+{
+  "endpoint": "GET /v1/users",
+  "params": {
+    "limit": 50
+  },
+  "status": 200,
+  "responseBody": {
+    "success": true,
+    "data": [
+      {
+        "id": "user-4933d81f",
+        "email": "supreme@example.com",
+        "phone": "+919876543210",
+        "firstName": "supreme_todo",
+        "lastName": "lastname",
+        "kycStatus": "pending",
+        "address": {
+          "line1": "123 Main Street",
+          "line2": null,
+          "city": "Mumbai",
+          "state": "Maharashtra",
+          "postalCode": "400001",
+          "country": "IN"
+        },
+        "createdAt": "2026-10-07T13:12:26.183Z",
+        "updatedAt": "2026-10-07T13:12:26.183Z"
+      },
+      {
+        "id": "user-744b5766",
+        "email": "test-user.mafaij@example.com",
+        "phone": null,
+        "firstName": "12345.0",
+        "lastName": "Tokyo Drift",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-03T17:09:07.057Z",
+        "updatedAt": "2026-10-03T17:09:07.057Z"
+      },
+      {
+        "id": "user-60e861ae",
+        "email": "test-user.rdwvxj@example.com",
+        "phone": null,
+        "firstName": "Odoriko",
+        "lastName": null,
+        "kycStatus": "pending",
+        "createdAt": "2026-10-03T17:09:05.715Z",
+        "updatedAt": "2026-10-03T17:09:05.715Z"
+      },
+      {
+        "id": "user-d908899d",
+        "email": "test-user.obaz4v@example.com",
+        "phone": null,
+        "firstName": "Nguyễn",
+        "lastName": "Hoàng",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-03T17:09:04.474Z",
+        "updatedAt": "2026-10-03T17:09:04.474Z"
+      },
+      {
+        "id": "user-c30e4e61",
+        "email": "test-user.l7z13x@example.com",
+        "phone": null,
+        "firstName": "O'Doriko",
+        "lastName": "Tokyo-Drift",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-03T17:09:03.241Z",
+        "updatedAt": "2026-10-03T17:09:03.241Z"
+      },
+      {
+        "id": "user-f12ae7b5",
+        "email": "test-user.ck64sm@example.com",
+        "phone": null,
+        "firstName": "Odoriko",
+        "lastName": "Tokyo Drift",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-03T17:09:01.973Z",
+        "updatedAt": "2026-10-03T17:09:01.973Z"
+      },
+      {
+        "id": "user-8c12a601",
+        "email": "test-user.8w2dlo@example.com",
+        "phone": null,
+        "firstName": "New",
+        "lastName": null,
+        "kycStatus": "pending",
+        "createdAt": "2026-10-03T17:09:00.699Z",
+        "updatedAt": "2026-10-03T17:09:00.699Z"
+      },
+      {
+        "id": "user-37cad278",
+        "email": "test-user.ofgcf1@example.com",
+        "phone": null,
+        "firstName": "12345.0",
+        "lastName": "Tokyo Drift",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-03T16:54:10.831Z",
+        "updatedAt": "2026-10-03T16:54:10.831Z"
+      },
+      {
+        "id": "user-b1e4ff3a",
+        "email": "test-user.myr6ln@example.com",
+        "phone": null,
+        "firstName": "Odoriko",
+        "lastName": null,
+        "kycStatus": "pending",
+        "createdAt": "2026-10-03T16:54:09.574Z",
+        "updatedAt": "2026-10-03T16:54:09.574Z"
+      },
+      {
+        "id": "user-d1ecc49f",
+        "email": "test-user.gqvi43@example.com",
+        "phone": null,
+        "firstName": "Nguyễn",
+        "lastName": "Hoàng",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-03T16:54:08.318Z",
+        "updatedAt": "2026-10-03T16:54:08.318Z"
+      },
+      {
+        "id": "user-8382dc37",
+        "email": "test-user.cgch0q@example.com",
+        "phone": null,
+        "firstName": "O'Doriko",
+        "lastName": "Tokyo-Drift",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-03T16:54:07.033Z",
+        "updatedAt": "2026-10-03T16:54:07.033Z"
+      },
+      {
+        "id": "user-6dae1b9f",
+        "email": "test-user.ftl15u@example.com",
+        "phone": null,
+        "firstName": "Odoriko",
+        "lastName": "Tokyo Drift",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-03T16:54:05.789Z",
+        "updatedAt": "2026-10-03T16:54:05.789Z"
+      },
+      {
+        "id": "user-f88a1a0f",
+        "email": "test-user.e39uvh@example.com",
+        "phone": null,
+        "firstName": "New",
+        "lastName": null,
+        "kycStatus": "pending",
+        "createdAt": "2026-10-03T16:54:04.519Z",
+        "updatedAt": "2026-10-03T16:54:04.519Z"
+      },
+      {
+        "id": "user-567338fe",
+        "email": "test-user.nrj7yb@example.com",
+        "phone": null,
+        "firstName": "12345.0",
+        "lastName": "Tokyo Drift",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-03T15:11:38.816Z",
+        "updatedAt": "2026-10-03T15:11:38.816Z"
+      },
+      {
+        "id": "user-67681941",
+        "email": "test-user.1mat20@example.com",
+        "phone": null,
+        "firstName": "Nguyễn",
+        "lastName": "Hoàng",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-03T15:11:36.491Z",
+        "updatedAt": "2026-10-03T15:11:36.491Z"
+      },
+      {
+        "id": "user-869d5f62",
+        "email": "test-user.8ayy02@example.com",
+        "phone": null,
+        "firstName": "Odoriko",
+        "lastName": null,
+        "kycStatus": "pending",
+        "createdAt": "2026-10-03T15:11:36.376Z",
+        "updatedAt": "2026-10-03T15:11:36.376Z"
+      },
+      {
+        "id": "user-46399dff",
+        "email": "test-user.c8unr6@example.com",
+        "phone": null,
+        "firstName": "O'Doriko",
+        "lastName": "Tokyo-Drift",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-03T15:11:36.347Z",
+        "updatedAt": "2026-10-03T15:11:36.347Z"
+      },
+      {
+        "id": "user-b8406884",
+        "email": "test-user.n1os6c@example.com",
+        "phone": null,
+        "firstName": "Odoriko",
+        "lastName": "Tokyo Drift",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-03T15:11:36.192Z",
+        "updatedAt": "2026-10-03T15:11:36.192Z"
+      },
+      {
+        "id": "user-89461b32",
+        "email": "test-user.k92nxu@example.com",
+        "phone": null,
+        "firstName": "New",
+        "lastName": null,
+        "kycStatus": "pending",
+        "createdAt": "2026-10-03T15:11:36.149Z",
+        "updatedAt": "2026-10-03T15:11:36.149Z"
+      },
+      {
+        "id": "user-b00930d8",
+        "email": "test-user.50snm2@example.com",
+        "phone": null,
+        "firstName": "12345.0",
+        "lastName": "Tokyo Drift",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-02T07:50:12.191Z",
+        "updatedAt": "2026-10-02T07:50:12.191Z"
+      },
+      {
+        "id": "user-9e9b4ab8",
+        "email": "test-user.6us2fw@example.com",
+        "phone": null,
+        "firstName": "O'Doriko",
+        "lastName": "Tokyo-Drift",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-02T07:50:12.171Z",
+        "updatedAt": "2026-10-02T07:50:12.171Z"
+      },
+      {
+        "id": "user-c41213bb",
+        "email": "test-user.nvqeeb@example.com",
+        "phone": null,
+        "firstName": "Odoriko",
+        "lastName": null,
+        "kycStatus": "pending",
+        "createdAt": "2026-10-02T07:50:12.135Z",
+        "updatedAt": "2026-10-02T07:50:12.135Z"
+      },
+      {
+        "id": "user-5e292347",
+        "email": "test-user.z3tp3n@example.com",
+        "phone": null,
+        "firstName": "Nguyễn",
+        "lastName": "Hoàng",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-02T07:50:12.110Z",
+        "updatedAt": "2026-10-02T07:50:12.110Z"
+      },
+      {
+        "id": "user-e0ac02b3",
+        "email": "test-user.5i895x@example.com",
+        "phone": null,
+        "firstName": "Odoriko",
+        "lastName": "Tokyo Drift",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-02T07:50:12.027Z",
+        "updatedAt": "2026-10-02T07:50:12.027Z"
+      },
+      {
+        "id": "user-f0c85c50",
+        "email": "test-user.vxei28@example.com",
+        "phone": null,
+        "firstName": "New",
+        "lastName": null,
+        "kycStatus": "pending",
+        "createdAt": "2026-10-02T07:50:12.016Z",
+        "updatedAt": "2026-10-02T07:50:12.016Z"
+      },
+      {
+        "id": "user-603da98a",
+        "email": "test-user.7o4j8g@example.com",
+        "phone": null,
+        "firstName": "Odoriko",
+        "lastName": "Tokyo Drift",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-02T07:42:19.865Z",
+        "updatedAt": "2026-10-02T07:42:19.865Z"
+      },
+      {
+        "id": "user-0c5e1704",
+        "email": "test-user.5hu9wp@example.com",
+        "phone": null,
+        "firstName": "12345.0",
+        "lastName": "Tokyo Drift",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-02T07:42:19.839Z",
+        "updatedAt": "2026-10-02T07:42:19.839Z"
+      },
+      {
+        "id": "user-7bbff497",
+        "email": "test-user.39vm7c@example.com",
+        "phone": null,
+        "firstName": "Odoriko",
+        "lastName": null,
+        "kycStatus": "pending",
+        "createdAt": "2026-10-02T07:42:19.678Z",
+        "updatedAt": "2026-10-02T07:42:19.678Z"
+      },
+      {
+        "id": "user-14adfa11",
+        "email": "test-user.fn8q3b@example.com",
+        "phone": null,
+        "firstName": "New",
+        "lastName": null,
+        "kycStatus": "pending",
+        "createdAt": "2026-10-02T07:42:19.656Z",
+        "updatedAt": "2026-10-02T07:42:19.656Z"
+      },
+      {
+        "id": "user-dc5ad171",
+        "email": "test-user.etxys7@example.com",
+        "phone": null,
+        "firstName": "Nguyễn",
+        "lastName": "Hoàng",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-02T07:42:19.624Z",
+        "updatedAt": "2026-10-02T07:42:19.624Z"
+      },
+      {
+        "id": "user-d240c1f9",
+        "email": "test-user.xntv56@example.com",
+        "phone": null,
+        "firstName": "O'Doriko",
+        "lastName": "Tokyo-Drift",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-02T07:42:19.620Z",
+        "updatedAt": "2026-10-02T07:42:19.620Z"
+      },
+      {
+        "id": "user-64dda685",
+        "email": "test-user.4gapgj@example.com",
+        "phone": null,
+        "firstName": "Odoriko",
+        "lastName": null,
+        "kycStatus": "pending",
+        "createdAt": "2026-10-02T07:40:35.295Z",
+        "updatedAt": "2026-10-02T07:40:35.295Z"
+      },
+      {
+        "id": "user-38133c9e",
+        "email": "test-user.gioxf3@example.com",
+        "phone": null,
+        "firstName": "Odoriko",
+        "lastName": "Tokyo Drift",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-02T07:40:35.193Z",
+        "updatedAt": "2026-10-02T07:40:35.193Z"
+      },
+      {
+        "id": "user-d2a623bf",
+        "email": "test-user.wfh0e8@example.com",
+        "phone": null,
+        "firstName": "12345.0",
+        "lastName": "Tokyo Drift",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-02T07:40:34.896Z",
+        "updatedAt": "2026-10-02T07:40:34.896Z"
+      },
+      {
+        "id": "user-1cd04834",
+        "email": "test-user.vwkxxu@example.com",
+        "phone": null,
+        "firstName": "Nguyễn",
+        "lastName": "Hoàng",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-02T07:40:34.792Z",
+        "updatedAt": "2026-10-02T07:40:34.792Z"
+      },
+      {
+        "id": "user-ffb04dce",
+        "email": "test-user.i283u7@example.com",
+        "phone": null,
+        "firstName": "O'Doriko",
+        "lastName": "Tokyo-Drift",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-02T07:40:34.716Z",
+        "updatedAt": "2026-10-02T07:40:34.716Z"
+      },
+      {
+        "id": "user-b9c426db",
+        "email": "test-user.69q27r@example.com",
+        "phone": null,
+        "firstName": "New",
+        "lastName": null,
+        "kycStatus": "pending",
+        "createdAt": "2026-10-02T07:40:34.670Z",
+        "updatedAt": "2026-10-02T07:40:34.670Z"
+      },
+      {
+        "id": "user-1431f263",
+        "email": "test-user.nn4710@example.com",
+        "phone": null,
+        "firstName": "New",
+        "lastName": null,
+        "kycStatus": "pending",
+        "createdAt": "2026-10-02T07:38:57.702Z",
+        "updatedAt": "2026-10-02T07:38:57.702Z"
+      },
+      {
+        "id": "user-4deec620",
+        "email": "test-user.z83dgv@example.com",
+        "phone": null,
+        "firstName": "Nguyễn",
+        "lastName": "Hoàng",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-02T07:38:57.687Z",
+        "updatedAt": "2026-10-02T07:38:57.687Z"
+      },
+      {
+        "id": "user-fe0e2330",
+        "email": "test-user.4dd7nn@example.com",
+        "phone": null,
+        "firstName": "12345.0",
+        "lastName": "Tokyo Drift",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-02T07:38:57.661Z",
+        "updatedAt": "2026-10-02T07:38:57.661Z"
+      },
+      {
+        "id": "user-903215c2",
+        "email": "test-user.0thblr@example.com",
+        "phone": null,
+        "firstName": "O'Doriko",
+        "lastName": "Tokyo-Drift",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-02T07:38:57.531Z",
+        "updatedAt": "2026-10-02T07:38:57.531Z"
+      },
+      {
+        "id": "user-5a9a8d8d",
+        "email": "test-user.xr1sgb@example.com",
+        "phone": null,
+        "firstName": "Odoriko",
+        "lastName": null,
+        "kycStatus": "pending",
+        "createdAt": "2026-10-02T07:38:57.523Z",
+        "updatedAt": "2026-10-02T07:38:57.523Z"
+      },
+      {
+        "id": "user-b611784e",
+        "email": "test-user.xuswf5@example.com",
+        "phone": null,
+        "firstName": "Odoriko",
+        "lastName": "Tokyo Drift",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-02T07:38:57.498Z",
+        "updatedAt": "2026-10-02T07:38:57.498Z"
+      },
+      {
+        "id": "user-673a867d",
+        "email": "test-user.6lhxr6@example.com",
+        "phone": null,
+        "firstName": "12345.0",
+        "lastName": "Tokyo Drift",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-01T08:13:20.134Z",
+        "updatedAt": "2026-10-01T08:13:20.134Z"
+      },
+      {
+        "id": "user-80b67132",
+        "email": "test-user.simmce@example.com",
+        "phone": null,
+        "firstName": "Odoriko",
+        "lastName": null,
+        "kycStatus": "pending",
+        "createdAt": "2026-10-01T08:13:18.904Z",
+        "updatedAt": "2026-10-01T08:13:18.904Z"
+      },
+      {
+        "id": "user-186070f0",
+        "email": "test-user.4gz7vf@example.com",
+        "phone": null,
+        "firstName": "Nguyễn",
+        "lastName": "Hoàng",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-01T08:13:17.676Z",
+        "updatedAt": "2026-10-01T08:13:17.676Z"
+      },
+      {
+        "id": "user-09458454",
+        "email": "test-user.n1kxnh@example.com",
+        "phone": null,
+        "firstName": "O'Doriko",
+        "lastName": "Tokyo-Drift",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-01T08:13:16.500Z",
+        "updatedAt": "2026-10-01T08:13:16.500Z"
+      },
+      {
+        "id": "user-76cee4fd",
+        "email": "test-user.er3c4w@example.com",
+        "phone": null,
+        "firstName": "Odoriko",
+        "lastName": "Tokyo Drift",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-01T08:13:15.278Z",
+        "updatedAt": "2026-10-01T08:13:15.278Z"
+      },
+      {
+        "id": "user-ac87e684",
+        "email": "test-user.xiriq1@example.com",
+        "phone": null,
+        "firstName": "New",
+        "lastName": null,
+        "kycStatus": "pending",
+        "createdAt": "2026-10-01T08:13:14.084Z",
+        "updatedAt": "2026-10-01T08:13:14.084Z"
+      },
+      {
+        "id": "user-5ad27ad5",
+        "email": "test-user.wczv27@example.com",
+        "phone": null,
+        "firstName": "12345.0",
+        "lastName": "Tokyo Drift",
+        "kycStatus": "pending",
+        "createdAt": "2026-10-01T08:08:35.798Z",
+        "updatedAt": "2026-10-01T08:08:35.798Z"
+      }
+    ],
+    "meta": {
+      "requestId": "544bac11-22c6-45aa-a056-9c0ec290ef3c",
+      "timestamp": "2026-10-09T07:59:54.124Z",
+      "version": "v1",
+      "pagination": {
+        "page": 1,
+        "limit": 50,
+        "total": 2993,
+        "totalPages": 60,
+        "hasNext": true,
+        "hasPrev": false,
+        "offset": 0
+      }
+    }
+  }
+}

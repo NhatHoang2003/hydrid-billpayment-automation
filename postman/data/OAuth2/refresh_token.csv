@@ -1,0 +1,3 @@
+testCaseId,refresh_token,expectedStatus
+AUTH-013,__VALID_REFRESH_TOKEN__,200
+AUTH-014,invalid-refresh-token,401
